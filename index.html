@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="theme-color" content="#17130f" />
+  <title>Dust &amp; Reckoning — A Frontier Tale</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2317130f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-size='48' fill='%23d8aa61'%3E%E2%98%85%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Rye&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main id="game" aria-label="Dust and Reckoning western game">
+    <canvas id="world"></canvas>
+    <div class="film-grain"></div>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✦</span><span>DUST <i>&amp;</i> RECKONING</span></div>
+      <div class="top-right"><span id="regionLabel">CINDER CREEK TERRITORY</span><span class="separator">/</span><span id="clockLabel">HIGH SUN</span><button id="mapButton" class="icon-button" aria-label="Open map">⌖ <small>MAP</small></button></div>
+    </header>
+    <section id="hud" class="hud hidden">
+      <div class="mission-card"><div class="eyebrow"><span class="gold-dot"></span> JOURNAL <span id="chapterLabel">CHAPTER I</span></div><h2 id="missionTitle">A Brother's Shadow</h2><p id="missionObjective">Speak with Mara at the telegraph office.</p><div class="progress-track"><span id="missionProgress"></span></div></div>
+      <div class="status-card"><div class="health-row"><span>VITALITY</span><div class="bar"><i id="healthBar"></i></div></div><div class="health-row horse-status"><span>HORSE</span><div class="bar horse-bar"><i id="horseBar"></i></div></div><div class="money-line"><span id="ammoLabel">✦ 6 / 36</span><span id="moneyLabel">$ 24.00</span></div></div>
+      <div id="crosshair"><i></i><b></b></div>
+      <div id="toast" class="toast"></div>
+      <div id="interactPrompt" class="interact-prompt hidden"><kbd>E</kbd><span>Talk</span></div>
+      <div class="reticle" id="reticle"></div>
+      <div class="bottom-hint"><span>WASD MOVE</span><span>SHIFT SPRINT</span><span>SPACE JUMP</span><span>F HOLSTER</span><span>R RELOAD</span><span>E INTERACT</span></div>
+      <div class="compass"><span>N</span><i></i><b id="compassNeedle"></b></div>
+    </section>
+    <section id="startScreen" class="screen">
+      <div class="title-wrap"><div class="title-kicker">AN ORIGINAL FRONTIER ADVENTURE</div><h1>DUST <em>&amp;</em><br/>RECKONING</h1><div class="title-rule"><span></span> CINDER CREEK, 1891 <span></span></div>
+        <p class="story-tease">A brother vanished. A town is keeping secrets.<br/>The trail leads west — where the law runs crooked.</p>
+        <div class="menu-actions"><button id="newGame" class="primary-button">RIDE INTO THE UNKNOWN <span>→</span></button><button id="continueGame" class="text-button">CONTINUE JOURNEY</button></div>
+        <div class="menu-footer">A FRONTIER STORY BY WAYFARER STUDIO <span>·</span> ORIGINAL GAME</div>
+      </div>
+      <div class="menu-side-note">CINDER CREEK<br/><span>POP. 412 · EST. 1867</span></div>
+    </section>
+    <section id="dialogue" class="dialogue hidden"><div class="dialogue-person"><div class="portrait" id="portrait">M</div><div><span class="eyebrow">CINDER CREEK</span><h3 id="speakerName">Mara Bell</h3></div></div><p id="dialogueText"></p><button id="dialogueContinue" class="primary-button small">CONTINUE <span>→</span></button></section>
+    <section id="mapScreen" class="overlay-screen hidden"><div class="overlay-heading"><div><div class="eyebrow">THE FRONTIER</div><h2>Cinder Creek Territory</h2></div><button class="close-button" id="closeMap">ESC <span>×</span></button></div><div class="map-layout"><div class="map-art" id="mapArt"><div class="map-river"></div><div class="map-road"></div><div class="map-name town-name">CINDER CREEK</div><div class="map-name ranch-name">MERCER RANCH</div><div class="map-name mine-name">OLD BELL MINE</div><div class="map-name canyon-name">RED WASH CANYON</div><div class="map-player" id="mapPlayer">✦</div><div class="map-marker mission-marker">◆</div></div><aside><span class="eyebrow">KNOWN PLACES</span><div class="location-list"><div>⌂ <span>Cinder Creek</span><small>FRONTIER TOWN</small></div><div>♧ <span>Mercer Ranch</span><small>FAMILY HOMESTEAD</small></div><div>◈ <span>Old Bell Mine</span><small>ABANDONED WORKINGS</small></div><div>⌁ <span>Red Wash Canyon</span><small>OUTLAW COUNTRY</small></div><div>♜ <span>Fort Carden</span><small>MILITARY OUTPOST</small></div></div><div class="map-legend"><i></i> YOU <b>◆</b> ACTIVE LEAD</div></aside></div><p class="map-tip">THE FRONTIER IS WIDER THAN IT LOOKS. FOLLOW THE DUSTY ROAD WEST.</p></section>
+    <section id="inventoryScreen" class="overlay-screen hidden"><div class="overlay-heading"><div><div class="eyebrow">YOUR KIT</div><h2>Saddlebags &amp; Pockets</h2></div><button class="close-button" id="closeInventory">ESC <span>×</span></button></div><div class="inventory-grid"><div class="inventory-item selected"><div class="item-icon">◉</div><div><b>Frontier Revolver</b><small>AMMO · 6 / 36</small></div><kbd>1</kbd></div><div class="inventory-item"><div class="item-icon">╱</div><div><b>Trail Repeater</b><small>AMMO · 12 / 48</small></div><kbd>2</kbd></div><div class="inventory-item"><div class="item-icon">♧</div><div><b>Field Provisions</b><small>RESTORES VITALITY</small></div><kbd>3</kbd></div><div class="inventory-item"><div class="item-icon">✧</div><div><b>Wild Sage</b><small>GATHERED HERBS · <span id="herbCount">0</span></small></div></div><div class="inventory-item"><div class="item-icon">◇</div><div><b>Deer Pelt</b><small>SELL TO THE GENERAL STORE</small></div></div><div class="inventory-note">A good trail hand travels light. The rest can be found along the way.</div></div></section>
+    <section id="pauseScreen" class="screen pause-screen hidden"><div class="pause-panel"><div class="eyebrow">THE FRONTIER CAN WAIT</div><h2>PAUSED</h2><button id="resumeButton" class="primary-button">BACK TO THE TRAIL <span>→</span></button><button id="pauseMap" class="text-button">OPEN THE MAP</button><button id="pauseInventory" class="text-button">SADDLEBAGS</button><div class="settings-row"><label for="volume">MASTER VOLUME</label><input id="volume" type="range" min="0" max="100" value="65"></div><p>WASD to ride · E to interact · Tab for saddlebags<br/>Made for keyboard, mouse, and touch.</p></div></section>
+    <div id="touchControls" class="touch-controls hidden"><div id="stickBase" class="stick"><i id="stickKnob"></i></div><div class="touch-actions"><button id="touchInteract">E<br/><small>USE</small></button><button id="touchAim">◎<br/><small>AIM</small></button><button id="touchFire">●<br/><small>FIRE</small></button><button id="touchJump">↑<br/><small>JUMP</small></button></div></div>
+    <div id="loading" class="loading"><span class="loading-star">✦</span><p>THE WEST IS WAITING</p></div>
+    <div id="errorBanner" class="error-banner hidden">The frontier engine could not load. Check your connection and refresh.</div>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
